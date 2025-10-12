@@ -1,6 +1,7 @@
-import AddTask from "./components/AddTask";
-import Tasks from "./components/Tasks";
 import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import ShowDescription from "./components/Description";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -55,14 +56,26 @@ function App() {
     setTasks([...tasks, newTask]);
   }
 
-  return (
-    <div>
-      <h1 className="principal-text">To-Do List</h1>
-      <AddTask onAddTaskSubmit={onAddTaskSubmit}/>
-      <div className="tasks-content">
-        <Tasks tasks={tasks} onTaskClick={onTaskClick} onDeleteTaskClick={onDeleteTaskClick}/>
-      </div>
-    </div>
+  return (    
+  
+      <Routes> 
+
+        <Route path="/" element={
+                <Home 
+                    tasks={tasks}
+                    onTaskClick={onTaskClick}
+                    onAddTaskSubmit={onAddTaskSubmit}
+                    onDeleteTaskClick={onDeleteTaskClick}
+                    />
+        }/>
+
+        <Route 
+            path="/tasks/:taskId" 
+            element={<ShowDescription tasks={tasks} />}  
+        />
+        
+      </Routes>
+    
   );
 }
 
