@@ -41,3 +41,7 @@ Caminho (Path)	Componente Renderizado	Função
 
 # :computer: Acesse o link para dar uma olhadinha :)
 https://todolist-helenavarela.netlify.app/
+
+________________________________________________________________________________________________________________
+### Planejamentos futuros
+Integração com backend Django
