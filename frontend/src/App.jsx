@@ -2,58 +2,76 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import ShowDescription from "./components/Description";
+import axios from 'axios';
+import { useEffect } from "react";
+
+const api = axios.create(
+    {
+    baseURL: 'http://127.0.0.1:8000/api/tasks',
+    }
+  );
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Aprender React",
-      description: "Estudar componentes e States.",
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      title: "Estudar FMC",
-      description: "Estudar: Sistema Binário e Teorema Chinês do Resto.",
-      isCompleted: false,
-    },
-    {
-      id: 3,
-      title: "Fazer listas de ITP",
-      description: "Estudar arrays e ponteiros em C.",
-      isCompleted: false,
-    }
-  ]);
+  const [tasks, setTasks] = useState([]);
 
-    // Função para riscar a task se ela for concluída
+  useEffect(() => {
+    api.get("/")
+      .then((res) => {
+        console.log(res.data);
+        setTasks(res.data);
+      })
+      .catch((err) => {
+        console.error("Erro ao buscar dados:", err);
+      });
+  }, []);
+
+  // Função para riscar a task se ela for concluída
   function onTaskClick(taskId){
-    const newTasks = tasks.map((task) => { 
-      // usa o .map() para percorrer a lista tasks e construir uma nova lista
-
-      if (task.id === taskId){
-      return{...task, isCompleted: !task.isCompleted};
-      // spread operator: ...task cria um novo objeto oŕme sobrescreve o atributo isCompleted
+    api.put(`update/${taskId}`)
+    // eslint-disable-next-line no-unused-vars
+    .then((res) => {
+      const newtasks = [...tasks]
+      for (let i = 0; i < newtasks.length; i++) {
+        if (newtasks[i].id === taskId){
+          newtasks[i].completed = !newtasks[i].completed
+        }
       }
-      return task
-    });
-    setTasks(newTasks);
-    // renderiza a nova lista 
+      setTasks(newtasks);
+    }).catch((erro) => {
+      console.error("erro:", erro);
+    })
+    
   }
 
   // Função para deletar tasks
   function onDeleteTaskClick(taskId){
-    const newTasks = tasks.filter(task => task.id != taskId);
-    setTasks(newTasks);
+    api.delete(`delete/${taskId}`)
+    .then((res) => {
+      console.log(res.data);
+      const newTasks = tasks.filter(task => task.id != taskId);
+      setTasks(newTasks);
+    }).catch((erro) => {
+      console.error('erro:', erro);
+    })
   }
 
   function onAddTaskSubmit(title, description){
-    const newTask = {
-      id: tasks.length + 1,
+    if (title.length > 50) {
+    alert("O título não pode ter mais de 50 caracteres!");
+    return; 
+    }
+
+    api.post("create", {
       title: title,
       description: description,
       isCompleted: false,
-    };
-    setTasks([...tasks, newTask]);
+    }).then((res) => {
+      console.log("Tarefa criada:", res.data);
+      setTasks([...tasks, res.data]);}
+    ).catch((err) => {
+      console.error("Erro ao criar tarefa:", err);
+    });
+
   }
 
   return (    
