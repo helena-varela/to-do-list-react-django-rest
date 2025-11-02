@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from tasks.models import ToDo
@@ -22,14 +23,14 @@ def createTask(request):
     serializer = ToDoSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT'])
 def updateTask(request,task_id):
     task = ToDo.objects.get(id = task_id)
-
-    task.title = request.data.get('title', task.title)
-    task.description = request.data.get('description', task.description)
+    task.completed =  not task.completed
     task.save()
     return Response({'mensagem':'sucesso'})
     
