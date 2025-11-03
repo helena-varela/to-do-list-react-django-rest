@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import ShowDescription from "./components/Description";
+import UpdateTaskDescription from "./components/UpdateTask";
 import axios from 'axios';
 import { useEffect } from "react";
 
@@ -41,6 +42,18 @@ function App() {
       console.error("erro:", erro);
     })
     
+  }
+
+  // Funcção para editar o title ou description de uma task
+  function onEditTaskClick(taskId, newTitle, newDescription){
+    api.put(`update_title_description/${taskId}/`, {
+      title: newTitle,
+      description: newDescription,
+    })
+    .then((res) => {
+      console.log("Tarefa atualizada:", res.data);
+    })
+    .catch((err) => console.error("Erro:", err));
   }
 
   // Função para deletar tasks
@@ -90,6 +103,11 @@ function App() {
         <Route 
             path="/tasks/:taskId" 
             element={<ShowDescription tasks={tasks} />}  
+        />
+
+        <Route 
+            path="/tasks/update/:taskId" 
+            element={<UpdateTaskDescription tasks={tasks} onEditTaskClick={onEditTaskClick} />}  
         />
         
       </Routes>

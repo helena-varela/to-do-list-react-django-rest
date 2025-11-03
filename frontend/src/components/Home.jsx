@@ -10,6 +10,9 @@ function Home({ tasks, onTaskClick, onDeleteTaskClick, onAddTaskSubmit}) {
         navigate(`/tasks/${taskId}`); 
     };
 
+    const handleUpdateTask = (taskId) => {
+        navigate(`/tasks/update/${taskId}`)
+    }
     return(
     <div>
         <h1 className="principal-text">To-Do List</h1>
@@ -20,6 +23,7 @@ function Home({ tasks, onTaskClick, onDeleteTaskClick, onAddTaskSubmit}) {
                 onTaskClick={onTaskClick} 
                 onDeleteTaskClick={onDeleteTaskClick}
                 ShowDescription={handleShowDescription}
+                UpdateTaskDescription={handleUpdateTask}
             />
         </div>
     </div>
