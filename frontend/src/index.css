@@ -60,44 +60,44 @@ button:hover{
 }
 
 .tasks-content{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     background-color: var(--white-color);
-    width: 50%;
+    width: 90rem;
     margin: 3rem auto;
     border-radius: 1rem;
     padding: 3rem;
 }
 
+.tasks-and-icons{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.icons-task{
+    display: flex;
+    flex-flow: row;
+    width: 25rem;
+    gap: 2rem;
+}
+
 .button-task{
-    display: inline flex;
+    display: flex;
     font-size: 2.4rem;
     font-weight: 600;
     border-radius: 10px;
-    margin-bottom: 1.5rem;
     padding: 1rem;
-    width: 77%;
+    width: 55rem;
 }
 
-.button-detail{ 
-    display: inline;
-    margin-left: 1rem;
-    width: 10%;
+.buttons-icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    padding: 1rem;
     font-size: 2.4rem;
     border-radius: 10px;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-}
-
-.button-delete{
-    margin-left: 1rem;
-    width: 10%;
-    font-size: 2.4rem;
-    font-weight: 600;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
 }
 
 .line-through {
@@ -106,10 +106,10 @@ button:hover{
 
 .add-task{
     background-color: var(--white-color);
-    width: 50%;
+    width: 90rem;
     border-radius: 1rem;
     margin: 2rem auto;
-    padding: 3rem;
+    padding: 2rem;
 }
 
 .add-task button{
@@ -117,19 +117,18 @@ button:hover{
     justify-content: center;
     margin: 0 auto;
     align-items: center;
-    width: 20%;
-    padding: 1rem;
+    width: 20rem;
+    padding: 1.2rem;
     border-radius: 0.8rem;
-    font-weight: 600;
-    font-size: 1.5rem;
+    font-weight: 700;
+    font-size: 2rem;
 }
 
 .inputs-content{
     display: flex;
     flex-flow: column;
-    width: 80%;
+    width: 70rem;
     margin: 0 auto;
-
 }
 
 input{
@@ -146,5 +145,6 @@ input{
 
 label{
     font-weight: 800;
+    font-size: 3rem;
     margin-bottom: 0.5rem;
 }

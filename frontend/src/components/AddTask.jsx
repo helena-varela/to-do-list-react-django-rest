@@ -15,7 +15,7 @@ function AddTask({onAddTaskSubmit}) {
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           />
-
+        
         <label htmlFor="description">Descrição</label>
         <input
           type="text"

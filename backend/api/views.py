@@ -34,6 +34,16 @@ def updateTask(request,task_id):
     task.save()
     return Response({'mensagem':'sucesso'})
     
+@api_view(['PUT'])
+def updateTitleDescription(request, task_id):
+    task = ToDo.objects.get(id = task_id)
+    print(task)
+    task.title = request.data.get('title', task.title)
+    task.description = request.data.get('description', task.description)
+    task.save()
+
+    return Response({'mensagem':'sucesso'})
+
 @api_view(['DELETE'])
 def deleteTask(request, task_id):
     task = ToDo.objects.get(id=task_id)
