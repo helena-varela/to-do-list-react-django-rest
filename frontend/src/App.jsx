@@ -45,13 +45,18 @@ function App() {
   }
 
   // Função para editar o title ou description de uma task
-  function onEditTaskClick(taskId, newTitle, newDescription){
+  function onEditTaskClick(taskId, newTitle, newDescription, onSuccessCallback){
     api.put(`update_title_description/${taskId}`, {
       title: newTitle,
       description: newDescription,
     })
     .then((res) => {
       console.log("Tarefa atualizada:", res.data);
+
+      if (onSuccessCallback) {
+        onSuccessCallback(); 
+      };
+      
     })
     .catch((err) => console.error("Erro:", err));
   }

@@ -39,7 +39,9 @@ function UpdateTaskDescription({ tasks, onEditTaskClick }) {
       <div className="buttons-updatetask">
         <button
           type="submit"
-          onClick={() => onEditTaskClick(taskIdNumerico, title, description)}
+          onClick={() => 
+            onEditTaskClick(taskIdNumerico, title, description, handleGoBack)
+          }
         >
           Salvar
         </button>

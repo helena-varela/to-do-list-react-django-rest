@@ -17,7 +17,8 @@ function Home({ tasks, onTaskClick, onDeleteTaskClick, onAddTaskSubmit}) {
     <div>
         <h1 className="principal-text">To-Do List</h1>
         <AddTask onAddTaskSubmit={onAddTaskSubmit}/>
-        <div className="tasks-content">
+        <div className="tasks-content"
+        style={{ display: tasks && tasks.length > 0 ? 'block' : 'none' }}>
             <Tasks 
                 tasks={tasks} 
                 onTaskClick={onTaskClick} 
