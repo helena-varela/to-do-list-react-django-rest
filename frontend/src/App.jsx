@@ -44,9 +44,9 @@ function App() {
     
   }
 
-  // Funcção para editar o title ou description de uma task
+  // Função para editar o title ou description de uma task
   function onEditTaskClick(taskId, newTitle, newDescription){
-    api.put(`update_title_description/${taskId}/`, {
+    api.put(`update_title_description/${taskId}`, {
       title: newTitle,
       description: newDescription,
     })
